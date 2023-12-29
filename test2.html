@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+            background-image: url('https://studiok40.com/wp-content/uploads/2023/03/search-results-data-1-web.jpg ');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+        }
+
+        #search-container {
+            text-align: center;
+            margin-top: 20px;
+            background-color:  #a3e4d7 ; /* Transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a bit of depth */
+        }
+
+
+.search-bar {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.search-bar label {
+    margin-right: 10px;
+}
+
+.search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+        .search-bar {
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #search-results {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        #search-results ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #search-results li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #search-results li:hover {
+            background-color: #bdc3c7;
+        }
+
+        #selected-skills {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .selected-skill {
+            background-color: #3498db;
+            color: white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .selected-skill-remove {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Recruiter Search</title>
+</head>
+<body>
+     <div id="search-container">
+        <div class="search-bar">
+            <label for="name-input">Name:</label>
+            <input type="text" id="name-input" class="search-input" placeholder="Search for name...">
+        </div>
+
+        <div class="search-bar">
+            <label for="email-input">Email:</label>
+            <input type="text" id="email-input" class="search-input" placeholder="Search for email...">
+        </div>
+
+        <div class="search-bar">
+            <label for="location-input">Location:</label>
+            <input type="text" id="location-input" class="search-input" placeholder="Search for location...">
+        </div>
+
+        <div class="search-bar">
+            <label for="skills-input">Skills:</label>
+            <input type="text" id="skills-input" class="search-input" placeholder="Search for skills...">
+        </div>
+
+        <div id="selected-skills"></div>
+
+
+        <div class="search-bar">
+            <label for="experience-min-input">Min Exp:</label>
+            <input type="text" id="experience-min-input" class="search-input" placeholder="Min Experience...">
+        </div>
+
+        <div class="search-bar">
+            <label for="experience-max-input">Max Exp:</label>
+            <input type="text" id="experience-max-input" class="search-input" placeholder="Max Experience...">
+        </div>
+
+
+         
+        <!-- <div id="search-results"></div> -->
+
+        <!-- Selected skills container -->
+        <!-- <div id="selected-skills"></div> -->
+
+        <button class="search-btn" onclick="handleSearch()">Search</button>
+
+        <div id="search-results"></div>
+    </div>
+
+
+    <script>
+        const skillsDatabase = ["Java", "Python", "JavaScript", "SQL", "HTML", "CSS", "React", "Node.js", "MongoDB", "C++", "C#", "PHP", "Ruby", "Swift", "TypeScript", "Angular", "Vue.js", "Django", "Flask", "Spring Boot", "Express.js", "Bootstrap", "Sass", "Less", "Git", "GitHub", "GitLab", "Bitbucket", "RESTful APIs", "GraphQL", "WebSocket", "Firebase", "AWS", "Azure", "Google Cloud Platform", "Docker", "Kubernetes", "Jenkins", "Travis CI", "CircleCI", "Ansible", "Terraform", "Vagrant", "Linux", "Unix", "Windows Server", "Active Directory", "LDAP", "Nginx", "Apache", "IIS", "Network Security", "Firewalls", "VPN", "Wireshark", "Metasploit", "OWASP", "Penetration Testing", "Cryptography", "Public Key Infrastructure (PKI)", "OAuth", "OpenID Connect", "JSON Web Tokens (JWT)", "WebSockets", "MQTT", "WebRTC", "TCP/IP", "DNS", "DHCP", "IPv4", "IPv6", "OSI Model", "HTTP", "HTTPS", "TCP", "UDP", "IPsec", "SSL/TLS", "Wireless Networking", "802.11a/b/g/n/ac/ax", "Bluetooth", "IoT", "Arduino", "Raspberry Pi", "Embedded Systems", "Assembly Language"];
+
+const searchInput = document.getElementById('skills-input');
+const magnifierBtn = document.getElementById('magnifier-btn');
+const searchResults = document.getElementById('search-results');
+const selectedSkillsDiv = document.getElementById('selected-skills');
+let selectedSkills = [];
+
+magnifierBtn.addEventListener('click', handleSearch);
+searchInput.addEventListener('input', handleSearch);
+
+function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredSkills = skillsDatabase.filter(skill => skill.toLowerCase().includes(searchTerm));
+    displayResults(filteredSkills);
+}
+
+function displayResults(results) {
+    searchResults.innerHTML = '';
+    if (results.length === 0) {
+        searchResults.innerHTML = 'No results found.';
+    } else {
+        const ul = document.createElement('ul');
+        results.forEach(skill => {
+            const li = document.createElement('li');
+            li.textContent = skill;
+            li.addEventListener('click', () => handleSkillSelection(skill));
+            ul.appendChild(li);
+        });
+        searchResults.appendChild(ul);
+    }
+}
+
+function handleSkillSelection(skill) {
+    if (!selectedSkills.includes(skill)) {
+        selectedSkills.push(skill);
+        updateSelectedSkills();
+
+        // Clear the search input
+        searchInput.value = '';
+
+        // Hide the search results
+        searchResults.innerHTML = '';
+    }
+}
+
+function updateSelectedSkills() {
+            const selectedSkillsDiv = document.getElementById('selected-skills');
+            selectedSkillsDiv.innerHTML = 'Selected Skills: ';
+            selectedSkills.forEach(skill => {
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'selected-skill';
+                skillDiv.textContent = skill;
+                skillDiv.addEventListener('click', () => removeSelectedSkill(skill));
+                const removeIcon = document.createElement('span');
+                removeIcon.className = 'selected-skill-remove';
+                removeIcon.innerHTML = '<span style="color: black;">&times;</span>';
+                skillDiv.appendChild(removeIcon);
+                selectedSkillsDiv.appendChild(skillDiv);
+            });
+        }
+
+function removeSelectedSkill(skill) {
+    selectedSkills = selectedSkills.filter(selectedSkill => selectedSkill !== skill);
+    updateSelectedSkills();
+}
+
+function handleCandidateSearch() {
+    const skillsTerm = selectedSkills.join(', ').toLowerCase();
+    const locationTerm = document.getElementById('location-input').value.toLowerCase();
+    const emailTerm = document.getElementById('email-input').value.toLowerCase();
+    const nameTerm = document.getElementById('name-input').value.toLowerCase();
+    const minExperience = parseInt(document.getElementById('experience-min-input').value) || 0;
+    const maxExperience = parseInt(document.getElementById('experience-max-input').value) || Infinity;
+
+    const filteredCandidates = candidatesDatabase.filter(candidate =>
+        (skillsTerm === "" || candidate.skills.some(skill => skillsTerm.includes(skill.toLowerCase()))) &&
+        (locationTerm === "" || candidate.location.toLowerCase().includes(locationTerm)) &&
+        (emailTerm === "" || candidate.email.toLowerCase().includes(emailTerm)) &&
+        (nameTerm === "" || candidate.name.toLowerCase().includes(nameTerm)) &&
+        (candidate.experience.split(" ")[0] >= minExperience && candidate.experience.split(" ")[0] <= maxExperience)
+    );
+
+    displayCandidateResults(filteredCandidates);
+}
+
+function displayCandidateResults(results) {
+    const searchResults = document.getElementById('search-results');
+    searchResults.innerHTML = '';
+    if (results.length === 0) {
+        searchResults.innerHTML = 'No results found.';
+    } else {
+        const ul = document.createElement('ul');
+        results.forEach(candidate => {
+            const li = document.createElement('li');
+            li.textContent = `Name: ${candidate.name}, Skills: ${candidate.skills.join(', ')}, Location: ${candidate.location}, Email: ${candidate.email}, Experience: ${candidate.experience}`;
+            ul.appendChild(li);
+        });
+        searchResults.appendChild(ul);
+    }
+}
+
+    </script>
+</body>
+</html>

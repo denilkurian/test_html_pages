@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://img.freepik.com/premium-photo/magnifying-glass-with-search-bar-white-background-magnifier-glass-with-search-bar-icon-seo-search-engine-optimisation-wording-concept_256259-2159.jpg?w=2000');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+        }
+
+        #search-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #search-input {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #magnifier-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        #search-results {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #search-results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #search-results li {
+            margin: 5px 0;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #eee;
+        }
+
+        #search-results li:last-child {
+            border-bottom: none;
+        }
+
+        #search-results li:hover {
+            background-color: #ecf0f1;
+        }
+
+        #selected-skills {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #2ecc71;
+            text-align: center;
+        }
+
+        .selected-skill {
+            margin: 5px;
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .selected-skill-remove {
+            margin-left: 5px;
+            cursor: pointer;    
+            color: black; 
+        }   
+        
+    </style>
+    <title>Skills Search</title>
+</head>
+<body>
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search for skills...">
+        <button id="magnifier-btn" onclick="handleSearch()">🔍</button>
+        <div id="search-results"></div>
+        <div id="selected-skills"></div>
+    </div>
+
+    <script>
+        const skillsDatabase = ["Java", "Python", "JavaScript", "SQL", "HTML", "CSS", "React", "Node.js", "MongoDB", "C++", "C#", "PHP", "Ruby", "Swift", "TypeScript", "Angular", "Vue.js", "Django", "Flask", "Spring Boot", "Express.js", "Bootstrap", "Sass", "Less", "Git", "GitHub", "GitLab", "Bitbucket", "RESTful APIs", "GraphQL", "WebSocket", "Firebase", "AWS", "Azure", "Google Cloud Platform", "Docker", "Kubernetes", "Jenkins", "Travis CI", "CircleCI", "Ansible", "Terraform", "Vagrant", "Linux", "Unix", "Windows Server", "Active Directory", "LDAP", "Nginx", "Apache", "IIS", "Network Security", "Firewalls", "VPN", "Wireshark", "Metasploit", "OWASP", "Penetration Testing", "Cryptography", "Public Key Infrastructure (PKI)", "OAuth", "OpenID Connect", "JSON Web Tokens (JWT)", "WebSockets", "MQTT", "WebRTC", "TCP/IP", "DNS", "DHCP", "IPv4", "IPv6", "OSI Model", "HTTP", "HTTPS", "TCP", "UDP", "IPsec", "SSL/TLS", "Wireless Networking", "802.11a/b/g/n/ac/ax", "Bluetooth", "IoT", "Arduino", "Raspberry Pi", "Embedded Systems", "Assembly Language", /* Add more skills */];
+
+        const searchInput = document.getElementById('search-input');
+        const magnifierBtn = document.getElementById('magnifier-btn');
+        const searchResults = document.getElementById('search-results');
+        const selectedSkillsDiv = document.getElementById('selected-skills');
+        let selectedSkills = [];
+
+        magnifierBtn.addEventListener('click', handleSearch);
+        searchInput.addEventListener('input', handleSearch);
+
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredSkills = skillsDatabase.filter(skill => skill.toLowerCase().includes(searchTerm));
+            displayResults(filteredSkills);
+        }
+
+        function displayResults(results) {
+            searchResults.innerHTML = '';
+            if (results.length === 0) {
+                searchResults.innerHTML = 'No results found.';
+            } else {
+                const ul = document.createElement('ul');
+                results.forEach(skill => {
+                    const li = document.createElement('li');
+                    li.textContent = skill;
+                    li.addEventListener('click', () => handleSkillSelection(skill));
+                    ul.appendChild(li);
+                });
+                searchResults.appendChild(ul);
+            }
+        }
+
+        function handleSkillSelection(skill) {
+            if (!selectedSkills.includes(skill)) {
+                selectedSkills.push(skill);
+                updateSelectedSkills();
+                
+                // Clear the search input
+                searchInput.value = '';
+
+                // Hide the search results
+                searchResults.innerHTML = '';
+            }
+        }
+
+        function updateSelectedSkills() {
+            selectedSkillsDiv.innerHTML = 'Selected Skills: ';
+            selectedSkills.forEach(skill => {
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'selected-skill';
+                skillDiv.textContent = skill;
+                skillDiv.addEventListener('click', () => removeSelectedSkill(skill));
+                const removeIcon = document.createElement('span');
+                removeIcon.className = 'selected-skill-remove';
+                removeIcon.innerHTML = '<span style="color: black;">&times;</span>';
+                skillDiv.appendChild(removeIcon);
+                selectedSkillsDiv.appendChild(skillDiv);
+            });
+        }
+
+        function removeSelectedSkill(skill) {
+            selectedSkills = selectedSkills.filter(selectedSkill => selectedSkill !== skill);
+            updateSelectedSkills();
+        }   
+    </script>
+</body>
+</html>

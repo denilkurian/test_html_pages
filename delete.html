@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Delete Page</title>
+
+    <style>
+     
+     body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* background-color: #f2f2f2; */
+    background-image: url('https://www.chromethemer.com/download/hd-wallpapers/batman-3840x2160.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.delete-box {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease; 
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+}
+
+.action-button:hover {
+    background-color: #2980b9;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="delete-box" id="deleteBox">
+            <h2>Delete Confirmation</h2><br>
+            <p>Are you sure you want to delete this item?</p>
+            <br>
+            <button onclick="deleteItem()">Delete</button>  
+            <button class="cancel-button" onclick="cancelDelete()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function deleteItem() {
+            // Simulate a delay before triggering the fade-out
+            setTimeout(() => {
+                const deleteBox = document.getElementById('deleteBox');
+                deleteBox.classList.add('fade-out');
+
+                // After the animation completes, you can redirect or perform other actions
+                setTimeout(() => {
+                    console.log('Item deleted successfully!');
+                    // Redirect or perform other actions here
+                }, 500); // Adjust the delay to match your CSS animation duration
+            }, 1000); // Simulated delay of 1 second
+        }   
+
+        function cancelDelete() {
+            const deleteBox = document.getElementById('deleteBox');
+            deleteBox.classList.add('fade-out');
+            setTimeout(() => {
+                // Redirect or perform other actions here
+                console.log('Delete canceled!');
+            }, 500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+This is a sample text file.
+It has multiple lines.
+Feel free to experiment with seek and tell. 
+Denil is a chapri.
