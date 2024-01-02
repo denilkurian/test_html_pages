@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://www.marktechpost.com/wp-content/uploads/2022/12/neural-network-data-being-pixelized-through-series-technological-scaled.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #dashboard {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            margin: 10px 0;
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Add style for invalid email */
+        .invalid-email {
+            border: 1px solid red;
+        }
+    </style>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div id="dashboard">
+        <a href="#personal-details" class="nav-link">Personal Details</a>
+        <a href="#contact-details" class="nav-link">Contact Details</a>
+        <a href="#position-details" class="nav-link">Position Details</a>
+        <a href="#client-details" class="nav-link">Client Details</a>
+        <a href="#work-details" class="nav-link">Work Details</a>
+        <a href="#date-details" class="nav-link">Date Details</a>
+        <a href="#fees-details" class="nav-link">Fees Details</a>
+        <a href="#file-uploads" class="nav-link">File Uploads</a>
+    </div>
+
+    <div id="personal-details" class="form-group">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" class="form-input" placeholder="Enter your name">
+    </div>
+
+    <div id="contact-details" class="form-group">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" class="form-input" placeholder="Enter your email">
+        <label for="mobile" class="form-label">Mobile Number:</label>
+        <input type="tel" id="mobile" class="form-input" pattern="[0-9]+" placeholder="Enter your mobile number" required>
+        <label for="additionalContact" class="form-label">Additional Contact:</label>
+        <input type="tel" id="additionalContact" class="form-input" pattern="[0-9]+" placeholder="Enter additional contact">
+    </div>
+
+    <div id="position-details" class="form-group">
+        <label for="position" class="form-label">Position:</label>
+        <input type="text" id="position" class="form-input" placeholder="Enter your position">
+    </div>
+
+    <div id="client-details" class="form-group">
+        <label for="client" class="form-label">Client:</label>
+        <input type="text" id="client" class="form-input" placeholder="Enter your client">
+        <label for="client-location" class="form-label">Client Location:</label>
+        <input type="text" id="client-location" class="form-input" placeholder="Enter client location">
+    </div>
+
+    <div id="work-details" class="form-group">
+        <label for="wo-detail" class="form-label">WO Detail:</label>
+        <textarea type="text" id="wo-detail" class="form-input" placeholder="Enter WO detail"></textarea>
+    </div>
+
+    <div id="date-details" class="form-group">
+        <label for="start-date" class="form-label">Start Date:</label>
+        <input type="date" id="start-date" class="form-input">
+        <label for="end-date" class="form-label">End Date:</label>
+        <input type="date" id="end-date" class="form-input">
+    </div>
+
+    <div id="fees-details" class="form-group">
+        <label for="fees" class="form-label">Fees:</label>
+        <input type="text" id="fees" class="form-input" placeholder="Enter fees">
+    </div>
+
+    <div id="file-uploads" class="form-group form-input-file">
+        <label for="resume" class="form-label">Upload Work Order:</label>
+        <input type="file" id="resume" accept=".pdf, .doc, .docx" class="form-input">
+    </div>
+
+    <div id="file-uploads" class="form-group form-input-file">
+        <label for="resume" class="form-label">Upload NDA:</label>
+        <input type="file" id="resume" accept=".pdf, .doc, .docx" class="form-input">
+    </div>
+
+    <div id="file-uploads" class="form-group form-input-file">
+        <label for="resume" class="form-label">Upload Resume:</label>
+        <input type="file" id="resume" accept=".pdf, .doc, .docx" class="form-input">
+    </div>
+
+    <button class="submit-btn">Submit</button>
+
+    <script>
+        const emailInput = document.getElementById('email');
+
+        emailInput.addEventListener('input', () => {
+            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+
+            if (!isValidEmail) {
+                emailInput.classList.add('invalid-email');
+            } else {
+                emailInput.classList.remove('invalid-email');
+            }
+        });
+    </script>
+</body>
+</html>

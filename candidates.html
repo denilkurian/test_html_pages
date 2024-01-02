@@ -48,6 +48,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             outline: none;
+            resize: vertical; /* Allow vertical resizing */
         }
 
         .submit-btn {
@@ -74,23 +75,61 @@
         </div>
 
         <div class="form-group">
-            <label for="skills" class="form-label">Skills:</label>
-            <input type="text" id="skills" class="form-input" placeholder="Enter your skills">
+            <!-- <label for="contact" class="form-label">Contact:</label>
+            <input type="text" id="contact" class="form-input" placeholder="Enter your contact">
+        </div> -->
+        <label for="mobile" class="form-label">Mobile Number:</label>
+        <input type="tel" id="mobile" class="form-input" pattern="[0-9]+" placeholder="Enter your mobile number" required>
         </div>
 
         <div class="form-group">
-            <label for="experience" class="form-label">Experience:</label>
-            <input type="text" id="experience" class="form-input" placeholder="Enter your experience">
+        <label for="additionalContact" class="form-label">Additional Contact:</label>
+        <input type="tel" id="additionalContact" class="form-input" pattern="[0-9]+" placeholder="Enter additional contact">
+        </div>
+
+        <div class="form-group">
+            <label for="position" class="form-label">Position:</label>
+            <input type="text" id="position" class="form-input" placeholder="Enter your position">
+        </div>
+
+        <div class="form-group">
+            <label for="client" class="form-label">Client:</label>
+            <input type="text" id="client" class="form-input" placeholder="Enter your client">
+        </div>
+
+        <div class="form-group">
+            <label for="client-location" class="form-label">Client Location:</label>
+            <input type="text" id="client-location" class="form-input" placeholder="Enter client location">
+        </div>
+
+        <div class="form-group">
+            <label for="wo-detail" class="form-label">WO Detail:</label>
+            <textarea type="text" id="wo-detail" class="form-input" placeholder="Enter WO detail"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="start-date" class="form-label">Start Date:</label>
+            <input type="date" id="start-date" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="end-date" class="form-label">End Date:</label>
+            <input type="date" id="end-date" class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="fees" class="form-label">Fees:</label>
+            <input type="text" id="fees" class="form-input" placeholder="Enter fees">
         </div>
 
 
         <div class="form-group form-input-file">
-            <label for="resume" class="form-label">Upload Resume:</label>
+            <label for="resume" class="form-label">Upload Work Order:</label>
             <input type="file" id="resume" accept=".pdf, .doc, .docx" class="form-input">
         </div>
 
         <div class="form-group form-input-file">
-            <label for="resume" class="form-label">Upload Resume:</label>
+            <label for="resume" class="form-label">Upload NDA:</label>
             <input type="file" id="resume" accept=".pdf, .doc, .docx" class="form-input">
         </div>
 
@@ -101,5 +140,19 @@
 
         <button class="submit-btn">Submit</button>
     </div>
+
+    <script>
+        const emailInput = document.getElementById('email');
+
+        emailInput.addEventListener('input', () => {
+            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+
+            if (!isValidEmail) {
+                emailInput.classList.add('invalid-email');
+            } else {
+                emailInput.classList.remove('invalid-email');
+            }
+        });
+    </script>
 </body>
 </html>
