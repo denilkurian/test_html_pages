@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+body{
+  background: -webkit-linear-gradient(left, rgb(30, 28, 29),rgb(35, 39, 105));
+  background: -webkit-linear-gradient(to right, rgb(30, 28, 29),rgb(35, 39, 105));
+  font-family: 'Roboto', sans-serif;
+  color: #e0e0e0;
+}
+
+section{
+  margin: 50px;
+  align-content: center;
+}
+
+h1{
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+  text-decoration: underline overline;
+  
+}
+
+table { 
+  margin: 1em 0;
+  width:100%;
+  table-layout: fixed;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  overlay-y: auto;
+}
+
+caption{
+  text-style: italic;
+  color: #d5c698;
+  text-align: center;
+}
+
+
+
+.table-header{
+
+ }
+
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+    background-color: rgba(255,255,255,0.3);
+  position: sticky;
+  top: 0;
+}
+
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+table tbody {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+table thead, table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 6px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.5); 
+}
+
+
+/* follow me template */
+.follow-me {
+  margin-top: 40px;
+  padding: 10px;
+  clear: left;
+  text-align: center;
+  font-size: 10px;
+  font-family: arial; 
+}
+.follow-me i {
+  font-style: normal;
+  color: #F50057;
+  font-size: 10px;
+  position: relative;
+}
+.follow-me a { 
+  text-decoration: none;
+}
+.follow-me a:hover {
+  text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <section>
+        <h1>Sample Data Table</h1>
+        <div class= "table-container">
+          <table>
+            <caption id="HeadersRow">Employee Data with a Fixed Column Header Row</caption>
+            <thead>
+              <tr class="table-header">
+                <th>Emp Code</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Role</th>
+                <th>Location</th>
+              </tr>        
+            </thead>
+            <tbody>
+              <tr>
+                <td>10001</td>
+                <td><img src="https://images-na.ssl-images-amazon.com/images/I/81WcnNQ-TBL.jpg" width="20px"></td>
+                <td>Sussane</td>
+                <td>Muller</td>
+                <td>Designer</td>
+                <td>Berlin</td>
+              </tr>   
+               <tr>
+                <td>10002</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Marie</td>
+                <td>Edward</td>
+                <td>Developer</td>
+                <td>Berlin</td>
+              </tr>    
+               <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr>   
+                   <tr>
+                <td>10004</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Nobert</td>
+                <td>Brown</td>
+                <td>Manager</td>
+                <td>Frankfurt</td>
+              </tr> 
+                   <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+                   <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+                   <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+                         <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+               
+                        <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+               
+                        <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+               
+                        <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+               
+                        <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr> 
+               
+                        <tr>
+                <td>10003</td>
+                <td><img src="https://unsplash.com/photos/sw3FSL9hIoI"></td>
+                <td>Dave</td>
+                <td>Brock</td>
+                <td>Lead</td>
+                <td>Berlin</td>
+              </tr>                  
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      <!-- follow me template -->
+      <div class="follow-me">
+        Follow me 
+        <i>@</i>
+        <a target="_blank" href="https://codepen.io/creativecoder28">Sakshi Sharma</a>
+      </div>
+</body>
+</html>
