@@ -60,10 +60,10 @@
             color: #1b4f72;
             font-family: "Nunito", sans-serif;
         }
-
+/* 
         .logo {
             display: none;
-        }
+        } */
 
         .wrapper {
             margin-top: 2vh;
@@ -162,7 +162,7 @@
                 content: "Age";
             }
 
-            td:nth-of-type(5):before {
+            td:nth-of-type(5):before {  
                 content: "Start date";
             }
 
@@ -174,20 +174,49 @@
                 display: none;
             }
         }
+
+        /* for center */
+
+        .table td {
+            text-align: center;
+            padding: 8px;
+        }
+
+        .table td:nth-child(3),
+        .table td:nth-child(4),
+        .table td:nth-child(5),
+        .table td:nth-child(6) {
+            text-align: center;
+        }
     </style>
 
 </head>
 
 <body>
     <nav class="main-menu">
-        <h1>D A T A P M I</h1>
-        <img class="logo"
-            src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb"
-            alt="" />
+        <h1>D A T A P M I</h1>  
+        <!-- <img class="logo"
+           src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb"
+            alt="" />  -->
         <ul>
             <div class="container wrapper">
+
+                <!-- <div class="options">
+                    <label for="entries">Display </label>
+                    <select id="entries" class="form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        <option value="-1">All</option>
+                    </select>
+                    <label for="search">Search </label>
+                    <input type="text" id="search" class="form-control input-sm">
+                </div> -->
                 <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
+                        
                         <tr>
                             <th class="col-md-2">Name</th>
                             <th class="col-md-2">Position</th>
@@ -472,7 +501,7 @@
                             <td>27</td>
                             <td>2011/05/07</td>
                             <td>$145,000</td>
-                        </tr>
+                        </tr>   
                         <tr>
                             <td>Gavin Cortez</td>
                             <td>Team Leader</td>

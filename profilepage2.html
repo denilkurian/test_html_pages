@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        .container {
+            text-align: center;
+            margin: 50px auto;
+        }
+
+        #profile-photo-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
+
+        #profile-photo {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+            border-radius: 50%;
+        }
+
+        #camera-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            background-color: #3498db;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        #profile-photo-input {
+            display: none;
+        }
+
+        #crop-btn {
+            display: none;
+            margin-top: 10px;
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #update-btn {
+            display: none;
+            margin-top: 10px;
+            background-color: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Profile Photo Section -->
+    <div id="profile-photo-container">
+        <label for="profile-photo-input" id="camera-icon">&#128247;</label>
+        <img id="profile-photo" alt="Profile Photo">
+        <input type="file" id="profile-photo-input" accept="image/*">
+        <button id="crop-btn">Crop Photo</button>
+        <button id="update-btn">Update Profile</button>
+    </div>
+</div>
+
+<script src="https://unpkg.com/cropperjs"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var profilePhotoInput = document.getElementById('profile-photo-input');
+        var profilePhotoContainer = document.getElementById('profile-photo-container');
+        var profilePhoto = document.getElementById('profile-photo');
+        var cropBtn = document.getElementById('crop-btn');
+        var updateBtn = document.getElementById('update-btn');
+        var cropper;
+
+        profilePhotoInput.addEventListener('change', function (e) {
+            var file = e.target.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    profilePhoto.src = event.target.result;
+                    profilePhoto.style.display = 'block';
+                    cropBtn.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        cropBtn.addEventListener('click', function () {
+            // Initialize Cropper.js
+            cropper = new Cropper(profilePhoto, {
+                aspectRatio: 1, // You can adjust the aspect ratio as needed
+                viewMode: 1,
+            });
+
+            // Hide unnecessary elements
+            profilePhotoContainer.style.display = 'none';
+            cropBtn.style.display = 'none';
+            updateBtn.style.display = 'block';
+        });
+
+        updateBtn.addEventListener('click', function () {
+            // Add logic to update the user's profile with the entered information
+            // After updating, you may want to show the preview and crop button again
+            profilePhotoContainer.style.display = 'block';
+            cropBtn.style.display = 'block';
+            updateBtn.style.display = 'none';
+        });
+    });
+</script>
+</body>
+</html>

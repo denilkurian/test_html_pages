@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <!-- Add your styles here -->
+    <style>
+   
+        body {
+            font-family: 'Arial', sans-serif;
+            /* background-color: #f4f4f4; */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: linear-gradient(to top right, #120230, #1a0345, #3e0673);
+
+
+
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+
+
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #profile-photo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        .container {
+            text-align: center;
+            margin: 50px auto;
+
+        }
+
+        #profile-photo-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 2px solid #2856b9;
+            /* Set the border color */
+            box-shadow: 0 0 10px rgb(247, 1, 1);
+            /* Set the blur color */
+        }
+
+        #profile-photo {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+            border-radius: 50%;
+            object-fit: cover;
+            /* This will make the image cover the entire container while maintaining aspect ratio */
+        }
+
+        #camera-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #profile-photo-input {
+            display: none;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Center items vertically */
+        }
+
+        #remove-btn {
+            margin-left: auto;
+            margin-top: 0;
+            /* Reset margin-top to ensure alignment */
+        }
+    </style>
+    <!-- Include Cropper.js library -->
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.min.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>User Profile</h1>
+    </header>
+
+    <div class="container">
+        <main>
+
+            <!-- Photo Upload Section -->
+            <!-- <div>
+        <h2>Profile Photo</h2>
+        <div>
+            <img id="profile-photo" src="default-profile.jpg" alt="Profile Photo">
+            <input type="file" id="photo-upload" accept="image/*">
+        </div>
+    </div> -->
+
+            <!-- Profile Photo Upload with Cropper -->
+            <!-- <div>
+        <label for="profile-photo">Profile Photo</label>
+        <input type="file" id="profile-photo">
+        <img id="preview" src="#" alt="Preview" style="display:none;">
+        <button id="crop-btn" style="display:none;">Crop Photo</button>
+    </div> -->
+
+            <!-- <div>
+        <label for="profile-photo">Profile Photo</label>
+        <div id="profile-photo-container">
+            <img id="profile-photo" src="default-profile.jpg" alt="Profile Photo">
+            <div id="camera-icon">&#128247;</div>
+        </div>
+        <input type="file" id="profile-photo-input">
+    </div> -->
+
+
+            <!-- Profile Photo Upload with Cropper -->
+            <div>
+                <label for="profile-photo">Profile Photo</label> <br>
+                <div id="profile-photo-container">
+                    <img id="profile-photo">
+                    <div id="camera-icon">&#128247;</div>
+                </div>
+                <input type="file" id="profile-photo-input">
+                <div id="button-container">
+                    <button id="crop-btn" style="display:none;">Crop Photo</button>
+                    <button id="remove-btn" style="display:none;">Remove Photo</button>
+                </div>
+                <button id="update-btn" style="display:none;">Update Profile</button>
+            </div>
+
+            <!-- Basic Information Section -->
+            <div>
+                <h2>Basic Information</h2>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" value="John Doe" disabled>
+
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" value="john.doe@example.com" disabled>
+
+                    <label for="mobile">Mobile:</label>
+                    <input type="text" id="mobile" value="123-456-7890" disabled>
+
+                    <label for="address">Address:</label>
+                    <textarea id="address" disabled>123 Main St, City</textarea>
+                </div>
+            </div>
+
+            <!-- Email Update Section -->
+            <div>
+                <h2>Email Update</h2>
+                <div>
+                    <label for="current-email">Current Email:</label>
+                    <input type="text" id="current-email">
+
+                    <label for="new-email">New Email:</label>
+                    <input type="email" id="new-email">
+
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password">
+
+                    <button onclick="updateEmail()">Update Email</button>
+                </div>
+            </div>
+
+
+            <!-- Password Update Section -->
+            <div>
+                <h2>Password Update</h2>
+                <div>
+                    <label for="current-password">Current Password:</label>
+                    <input type="password" id="current-password">
+
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password">
+
+                    <label for="repeat-password">Repeat Password:</label>
+                    <input type="password" id="repeat-password">
+
+                    <button onclick="updatePassword()">Change Password</button>
+                </div>
+            </div>
+
+            <!-- Update Profile Button -->
+            <button id="update-btn">Update Profile</button>
+            
+
+
+        </main>
+    </div>
+    <script src="https://unpkg.com/cropperjs"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var profilePhotoInput = document.getElementById('profile-photo-input');
+            var profilePhoto = document.getElementById('profile-photo');
+            var cameraIcon = document.getElementById('camera-icon');
+            var removeBtn = document.getElementById('remove-btn');
+            var cropBtn = document.getElementById('crop-btn');
+            var updateBtn = document.getElementById('update-btn');
+            var cropper;
+
+            profilePhotoInput.addEventListener('change', function (e) {
+                var file = e.target.files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        profilePhoto.src = event.target.result;
+                        cameraIcon.style.display = 'none';
+                        removeBtn.style.display = 'block';
+                        cropBtn.style.display = 'block';
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            cameraIcon.addEventListener('click', function () {
+                profilePhotoInput.click();
+            });
+
+            removeBtn.addEventListener('click', function () {
+                // Reset the profile photo to default
+                profilePhoto.src = 'default-profile.jpg';
+                cameraIcon.style.display = 'block';
+                removeBtn.style.display = 'none';
+                cropBtn.style.display = 'none';
+                updateBtn.style.display = 'none';
+            });
+
+            cropBtn.addEventListener('click', function () {
+                // Initialize Cropper.js
+                cropper = new Cropper(profilePhoto, {
+                    aspectRatio: 1,
+                    viewMode: 3,
+                    dragMode: 'move',
+                    autoCropArea: 1,
+                });
+
+                // Hide the camera icon and crop button
+                cameraIcon.style.display = 'none';
+                // removeBtn.style.display = 'none';    
+                cropBtn.style.display = 'none';
+
+                // Show the update button
+                updateBtn.style.display = 'block';
+            });
+
+            updateBtn.addEventListener('click', function () {
+                // Get the cropped data URL
+                var croppedDataUrl = cropper.getCroppedCanvas().toDataURL();
+
+                // Log the data URL (You can save it to the server or update the user's profile)
+                console.log(croppedDataUrl);
+
+                // Update the profile photo preview
+                profilePhoto.src = croppedDataUrl;
+
+                // Reset Cropper
+                cropper.destroy();
+                cropper = null;
+
+                // Show the camera icon and crop button
+                cameraIcon.style.display = 'block';
+                // removeBtn.style.display = 'none';
+                cropBtn.style.display = 'block';
+
+                // Hide the update button
+                updateBtn.style.display = 'none';
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
