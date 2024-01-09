@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 50px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            cursor: pointer;
+        }
+
+        form {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        label, input {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<table id="eventCalendar">
+    <thead>
+    <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<form id="eventForm">
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" name="eventName" required>
+
+    <label for="eventDate">Event Date:</label>
+    <input type="date" id="eventDate" name="eventDate" required>
+
+    <button type="button" onclick="addEvent()">Add Event</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        loadCalendar();
+    });
+
+    function loadCalendar() {
+        const calendarTable = document.getElementById('eventCalendar');
+        const calendarBody = calendarTable.getElementsByTagName('tbody')[0];
+        calendarBody.innerHTML = '';
+
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+
+        let dayCounter = 1;
+
+        for (let i = 0; i < 6; i++) {
+            const row = calendarBody.insertRow(i);
+
+            for (let j = 0; j < 7; j++) {
+                const cell = row.insertCell(j);
+
+                if (i === 0 && j < firstDay) {
+                    // Add empty cells before the first day of the month
+                    continue;
+                }
+
+                if (dayCounter > daysInMonth) {
+                    // Stop adding cells if we've reached the end of the month
+                    break;
+                }
+
+                cell.innerHTML = dayCounter;
+                cell.setAttribute('data-date', `${currentYear}-${currentMonth + 1}-${dayCounter}`);
+                cell.addEventListener('click', displayEventForm);
+
+                dayCounter++;
+            }
+        }
+    }
+
+    function addEvent() {
+        const eventName = document.getElementById('eventName').value;
+        const eventDate = document.getElementById('eventDate').value;
+
+        if (!eventName || !eventDate) {
+            alert('Please enter both event name and date.');
+            return;
+        }
+
+        const eventCell = document.querySelector(`[data-date="${eventDate}"]`);
+        if (eventCell) {
+            eventCell.innerHTML += `<br>${eventName}`;
+        }
+
+        document.getElementById('eventForm').reset();
+    }
+
+    function displayEventForm() {
+        const selectedDate = this.getAttribute('data-date');
+        document.getElementById('eventDate').value = selectedDate;
+    }
+</script>
+
+</body>
+</html>
