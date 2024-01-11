@@ -3,69 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #btn {
-            color:white;
-            background-color: rgb(211, 61, 61);
-            width: 200px;
-            border: 3px solid green;
-            border-radius: 4px;
-            padding: 10px 25px;
-        }
-    </style>
+    <title>IT Skills Recommendation</title>
 </head>
 <body>
-    
-    
+    <h1>IT Skills Recommendation</h1>
 
+    <label for="category">Select IT Category:</label>
+    <select id="category" onchange="getSkills()">
+        <option value="web_development">Web Development</option>
+        <option value="data_science">Data Science</option>
+        <!-- Add more options as needed -->
+    </select>
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+    <label for="userInput">User Input:</label>
+    <input type="text" id="userInput" oninput="getSkills()">
 
-<center>
-<button id="btn"></button>
-</center>
+    <h2>Recommended Skills:</h2>
+    <ul id="recommendedSkills"></ul>
 
+    <script>
+        function getSkills() {
+            const category = document.getElementById('category').value;
+            const userInput = document.getElementById('userInput').value;
 
-<script>
-let name = window.prompt('')
-let btns = document.getElementById('btn').innerHTML= name+' Touch Me'
+            // Replace the API endpoint with your actual API providing skills data
+            const apiUrl = `https://api.skills.com/skills?category=${category}&user_input=${userInput}`;
 
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the HTML with the recommended skills
+                    const recommendedSkillsList = document.getElementById('recommendedSkills');
+                    recommendedSkillsList.innerHTML = '';
 
-
-let btn = document.getElementById('btn').addEventListener('mouseover',function myfunction(){
-    if (name=='rojin') {
-        alert (name+' chapri why you touch me go and find sidhanandha gowda')
-    }
-
-    else if (name=='syed') {
-        alert (name+' Find elastic search')
-    }
-
-    else if (name=='akhil') {
-        alert (name+' Is pipeline finished')
-    }
-
-    else {
-        alert (name+' Who are you new chapri ')
-    }
-    
-})      
-
-
-
-
-
-
-
-
-
-</script>
-
-
+                    data.skills.forEach(skill => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = skill;
+                        recommendedSkillsList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching skills:', error);
+                });
+        }
+    </script>
 </body>
 </html>
-
 
 
 
