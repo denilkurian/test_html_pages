@@ -47,14 +47,9 @@
 # Using Java's System.out.println() method
 # from java.lang import System
 
-# System.out.println("Hello, World!")
+# .out.println("Hello, World!")
 
 
-
-a = 10
-a = "string"
-
-print(a)
 
 
 
